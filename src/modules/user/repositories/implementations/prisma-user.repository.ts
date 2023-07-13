@@ -8,7 +8,7 @@ export class PrismaUserRepository implements UserRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(data: CreateUserDto) {
-    return await this.prisma.user.create({ data: data });
+    return await this.prisma.user.create({ data });
   }
 
   async findAllUsers() {
@@ -20,6 +20,6 @@ export class PrismaUserRepository implements UserRepository {
   }
 
   async findUserById(id: number) {
-    return await this.prisma.user.findFirst({ where: { id } });
+    return await this.prisma.user.findUnique({ where: { id } });
   }
 }

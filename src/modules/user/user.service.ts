@@ -6,17 +6,17 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly usersRepository: UserRepository) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   async create(createUserDto: CreateUserDto) {
     const { email, password } = createUserDto;
-    const user = await this.usersRepository.findUserByEmail(email);
+    const user = await this.userRepository.findUserByEmail(email);
     if (user)
       new HttpException('This email is already in use!', HttpStatus.CONFLICT);
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    return await this.usersRepository.create({
+    return await this.userRepository.create({
       ...createUserDto,
       password: hashedPassword,
     });
