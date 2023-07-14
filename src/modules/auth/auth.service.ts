@@ -7,8 +7,8 @@ import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
-  private AUDIENCE = 'users';
-  private ISSUER = 'SocialPostify';
+  private AUDIENCE = 'user';
+  private ISSUER = 'social-postify';
 
   constructor(
     private readonly userRepository: UserRepository,
