@@ -23,9 +23,9 @@ model User {
 model Publication {
   id            Int      @id @default(autoincrement())
   image         String
-  title         String
+  title         String   @unique
   text          String
-  dateToPublish DateTime
+  dateToPublish String
   published     Boolean  @default(false)
   socialMedia   String
   createdAt     DateTime @default(now())
