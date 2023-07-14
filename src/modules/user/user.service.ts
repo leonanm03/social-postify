@@ -11,11 +11,7 @@ export class UserService {
   async create(createUserDto: CreateUserDto) {
     const { email, password } = createUserDto;
 
-    console.log(`vou procurar pelo email ${email}`);
-
     const user = await this.userRepository.findUserByEmail(email);
-
-    console.log(`achei o user`, user);
     if (user)
       throw new HttpException(
         'This email is already in use!',
@@ -30,19 +26,9 @@ export class UserService {
     });
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async findUserById(id: number) {
+    const user = await this.userRepository.findUserById(id);
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    return user;
   }
 }
